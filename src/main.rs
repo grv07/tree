@@ -11,16 +11,17 @@ fn main() -> io::Result<()> {
 }
 
 fn print_tree(path: &PathBuf) -> io::Result<()> {
+    // let mut dir = "";
     for entry in read_dir(path)? {
         let entry = entry?;
         let path = entry.path();
         if path.is_dir() {
-            println!(">{:?}", path);
+            println!("{:?}", path.file_name().unwrap());
             print_tree(&path)?;
         }
         else {
             println!("   |");
-            println!("   -----------{:?}", path);
+            println!("   -----------{:?}", path.file_name().unwrap());
         }
     }
     Ok(())
