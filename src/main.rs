@@ -3,25 +3,45 @@ use std::fs::*;
 use std::io;
 use std::path::*;
 
-fn main() -> io::Result<()> { 
+fn main() -> io::Result<()> {
     let path = env::current_dir().unwrap();
     println!("{:?}", path);
-    print_tree(&path)?;
+    print_tree(&path, 0)?;
     Ok(())
 }
 
-fn print_tree(path: &PathBuf) -> io::Result<()> {
-    // let mut dir = "";
+fn x_dis(x: i32) -> std::string::String {
+    let mut s = String::new();
+    for _ in 1..x {
+        s.push_str(" ");
+    }
+    s
+}
+
+fn create_line(x: i32, y: i32) {
+    for _ in 1..y {
+        print!("{}", x_dis(x));
+        println!("{}", "|");
+    }
+}
+
+fn print_tree(path: &PathBuf, depth: i32) -> io::Result<()> {
+    let mut count = 0;
     for entry in read_dir(path)? {
-        let entry = entry?;
-        let path = entry.path();
+        let path = entry?.path();
         if path.is_dir() {
-            println!("{:?}", path.file_name().unwrap());
-            print_tree(&path)?;
+            if count <= 21 {
+                create_line(1*depth, 3);
+                let x_depth = x_dis(1*depth);
+                println!("{}--{:?}", x_depth, path.file_name().unwrap());
+                let _ = print_tree(&path, depth+3);
+            }
+            count += 1;
         }
         else {
-            println!("   |");
-            println!("   -----------{:?}", path.file_name().unwrap());
+            let x_dis = x_dis((1*depth) + 3);
+            println!("{}|", x_dis);
+            println!("{}--{:?}", x_dis, path.file_name().unwrap());
         }
     }
     Ok(())
