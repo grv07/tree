@@ -1,8 +1,8 @@
+use colored::*;
 use std::env;
 use std::fs::*;
 use std::io;
 use std::path::*;
-use colored::*;
 
 fn main() -> io::Result<()> {
     let path = env::current_dir().unwrap();
@@ -30,14 +30,13 @@ fn print_tree(path: &PathBuf, depth: i32) -> io::Result<()> {
     for entry in read_dir(path)? {
         let path = entry?.path();
         if path.is_dir() {
-            create_line(1*depth, 2);
-            let x_dis = x_dis(1*depth);
+            create_line(depth, 2);
+            let x_dis = x_dis(depth);
             let t = format!("{}--{:?}", x_dis, path.file_name().unwrap());
             println!("{}", t.blue());
-            let _ = print_tree(&path, depth+3);
-        }
-        else {
-            let x_dis = x_dis((1*depth) + 3);
+            let _ = print_tree(&path, depth + 3);
+        } else {
+            let x_dis = x_dis((depth) + 3);
             let file_branch = format!("{}--{:?}", x_dis, path.file_name().unwrap());
             println!("{}{}", x_dis, "|".green());
             println!("{}", file_branch.green());
