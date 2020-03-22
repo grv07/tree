@@ -26,17 +26,13 @@ fn create_line(x: i32, y: i32) {
 }
 
 fn print_tree(path: &PathBuf, depth: i32) -> io::Result<()> {
-    let mut count = 0;
     for entry in read_dir(path)? {
         let path = entry?.path();
         if path.is_dir() {
-            if count <= 21 {
-                create_line(1*depth, 3);
-                let x_depth = x_dis(1*depth);
-                println!("{}--{:?}", x_depth, path.file_name().unwrap());
-                let _ = print_tree(&path, depth+3);
-            }
-            count += 1;
+            create_line(1*depth, 3);
+            let x_dis = x_dis(1*depth);
+            println!("{}--{:?}", x_dis, path.file_name().unwrap());
+            let _ = print_tree(&path, depth+3);
         }
         else {
             let x_dis = x_dis((1*depth) + 3);
