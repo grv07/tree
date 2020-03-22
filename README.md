@@ -1,7 +1,7 @@
 # tree
 A basic implementation of tree. A tool to print directory structure.
 
-![Screenshot](https://user-images.githubusercontent.com/11697220/77249210-7e056180-6c65-11ea-8e9e-c7f95616dcb3.png)
+![Screenshot](https://user-images.githubusercontent.com/11697220/77249844-d6d6f900-6c69-11ea-8d15-23dca3705ac5.png)
 
 How to install ?
 
