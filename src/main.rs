@@ -30,7 +30,7 @@ fn print_tree(path: &PathBuf, depth: i32) -> io::Result<()> {
     for entry in read_dir(path)? {
         let path = entry?.path();
         if path.is_dir() {
-            create_line(1*depth, 3);
+            create_line(1*depth, 2);
             let x_dis = x_dis(1*depth);
             let t = format!("{}--{:?}", x_dis, path.file_name().unwrap());
             println!("{}", t.blue());
